@@ -3,6 +3,50 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
+st.set_page_config(
+    page_title="Import-Export Dashboard",
+    page_icon="📦",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Page background color and custom CSS
+page_bg_color = """
+    <style>
+    body {
+        background-color: #e8f5e9;
+    }
+    .metric-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .metric-box {
+        padding: 15px;
+        margin: 5px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .metric-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333333;
+    }
+    .metric-value {
+        font-size: 20px;
+        color: #007bff;
+    }
+    .metric-delta {
+        color: #ff6b6b;
+    }
+    </style>
+"""
+st.markdown(page_bg_color, unsafe_allow_html=True)
+
+# Sidebar
+with st.sidebar:
+    st.title('📦 Import-Export Dashboard')
 
 df= pd.read_csv(r'Imports_Exports_Dataset.csv')
 my_sample=df.sample(n=3001, random_state=55040)
@@ -22,7 +66,7 @@ if 'Date' in filtered_data.columns:
     filtered_data['Date'] = pd.to_datetime(filtered_data['Date'], dayfirst=True, errors='coerce')
 
 # Main Dashboard Title
-st.title('Interactive Imports and Exports Dashboard')
+#st.title('Interactive Imports and Exports Dashboard')
 
 ### 1. Top Countries Bar Plot
 st.subheader(f'Top {top_n_countries} Countries by {import_export_filter} Volume')
